@@ -162,7 +162,7 @@ class SmartGradeAPIClient:
         """Verify SMS code and obtain JWT token.
         
         Args:
-            sms_code: 4-digit SMS verification code
+            sms_code: 6-digit SMS verification code
             
         Returns:
             JWT token string
@@ -342,6 +342,9 @@ class SmartGradeAPIClient:
 
                 response.raise_for_status()
                 data = await response.json()
+                # API may return list directly or wrapped in dict
+                if isinstance(data, list):
+                    return data
                 return data.get("devices", [])
 
         except TokenExpiredError:

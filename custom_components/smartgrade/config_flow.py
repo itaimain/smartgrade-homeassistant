@@ -111,16 +111,11 @@ class SmartGradeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     domain_id = decoded.get("dom")
                     token_expiry = decoded.get("exp")
                     
-                    # Test API access by fetching devices
-                    api.jwt_token = jwt_token
-                    api.user_id = user_id
-                    api.domain_id = domain_id
-                    devices = await api.async_get_devices()
-                    
                     _LOGGER.info(
-                        "Successfully authenticated for %s, found %d devices",
+                        "Successfully authenticated for %s (user_id: %s, domain_id: %s)",
                         self._phone_number,
-                        len(devices),
+                        user_id,
+                        domain_id,
                     )
                     
                     # Check if this is a reauth flow
@@ -242,7 +237,7 @@ class SmartGradeOptionsFlowHandler(config_entries.OptionsFlow):
 
     def __init__(self, config_entry: config_entries.ConfigEntry):
         """Initialize options flow."""
-        self.config_entry = config_entry
+        self._config_entry = config_entry
 
     async def async_step_init(
         self, user_input: dict[str, Any] | None = None
