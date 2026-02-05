@@ -40,8 +40,9 @@ API_DEVICE_TOGGLE = "/api/v1/devices/{device_id}/toggle_switches"
 API_DEVICE_TIMERS = "/api/v1/devices/{device_id}/timers"
 API_DEVICE_TIMER = "/api/v1/devices/{device_id}/timers/{timer_id}"
 API_DEVICE_KWH = "/api/v1/devices/{device_id}/kwh"
-API_SITES = "/api/v1/sites"
+API_USER_SITES = "/api/v1/users/{user_id}/sites"
 API_SITE_DEVICES = "/api/v1/sites/{site_id}/devices"
+API_USER_PROFILE = "/api/v1/users/profile"
 
 # MQTT Topics
 MQTT_TOPIC_POWER = "s/{domain_id}/{device_id}/power"

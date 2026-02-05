@@ -18,9 +18,10 @@ from .const import (
     API_DEVICES,
     API_LOGIN_CODE,
     API_SITE_DEVICES,
-    API_SITES,
     API_TIMEOUT,
     API_USER,
+    API_USER_PROFILE,
+    API_USER_SITES,
     BASIC_AUTH_PASS,
     BASIC_AUTH_USER,
     ERROR_AUTH_FAILED,
@@ -256,15 +257,16 @@ class SmartGradeAPIClient:
             TokenExpiredError: If JWT token has expired
             SmartGradeAuthError: If request fails
         """
-        if not self.jwt_token:
-            raise SmartGradeAuthError("Not authenticated - no JWT token")
+        if not self.jwt_token or not self.user_id:
+            raise SmartGradeAuthError("Not authenticated - no JWT token or user ID")
 
         headers = {"Authorization": f"Bearer {self.jwt_token}"}
-        params = {"withShared": str(with_shared).lower()}
+        params = {"shared": str(with_shared).lower()}
+        url = f"{self.base_url}{API_USER_SITES}".format(user_id=self.user_id)
 
         try:
             async with self.session.get(
-                f"{self.base_url}{API_SITES}",
+                url,
                 headers=headers,
                 params=params,
                 timeout=ClientTimeout(total=API_TIMEOUT),
