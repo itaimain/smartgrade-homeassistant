@@ -13,7 +13,7 @@
       },
       "sms": {
         "title": "Enter SMS Verification Code",
-        "description": "Enter the 6-digit code sent to {phone_number}",
+        "description": "Enter the 4-digit code sent to {phone_number}",
         "data": {
           "sms_code": "SMS Code"
         }

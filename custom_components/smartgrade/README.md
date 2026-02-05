@@ -46,7 +46,7 @@ Home Assistant custom integration for SmartGrade smart switches and water heater
 3. Search for "SmartGrade"
 4. Enter your Israeli phone number (e.g., 0501234567)
 5. Wait for SMS verification code
-6. Enter the 6-digit code
+6. Enter the 4-digit code
 7. Your devices will be automatically discovered
 
 ### Token Expiration
@@ -224,7 +224,7 @@ automation:
 
 **Solutions:**
 
-1. Double-check the 6-digit code from your SMS
+1. Double-check the 4-digit code from your SMS
 2. Make sure you're entering the most recent code
 3. Request a new code if the old one expired
 4. Check for extra spaces when copying the code
