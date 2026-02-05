@@ -23,8 +23,8 @@ MQTT_PORT = 1883
 MQTT_KEEPALIVE = 60
 
 # Update intervals
-SCAN_INTERVAL = 30  # seconds (HTTP fallback)
-SCAN_INTERVAL_MQTT = 300  # seconds (when MQTT connected, only for timers/schedules)
+SCAN_INTERVAL = 10  # seconds (HTTP polling for state updates)
+SCAN_INTERVAL_MQTT = 60  # seconds (when MQTT connected, only for timers/schedules)
 TOKEN_WARNING_DAYS = 3
 
 # Platforms

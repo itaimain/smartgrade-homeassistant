@@ -7,7 +7,9 @@ Home Assistant custom integration for SmartGrade smart switches and water heater
 ## Features
 
 - **Switch Control**: Turn water heaters and switches on/off
-- **Real-time Updates**: MQTT-based instant state changes
+- **Real-time Updates**: 
+  - Instant updates when controlling from Home Assistant (via MQTT)
+  - 10-second polling for changes made in the SmartGrade app
 - **Energy Monitoring**: Track kWh consumption (if supported by device)
 - **Timer Management**: Create/delete timers via services
 - **Device Status**: Monitor online/offline status
@@ -174,21 +176,37 @@ automation:
             - friday
 ```
 
+## Known Limitations
+
+### MQTT Update Direction
+
+- **Home Assistant → Device**: ✅ Instant updates via MQTT
+- **Device → Home Assistant**: ✅ Instant updates via MQTT  
+- **SmartGrade App → Home Assistant**: ⏱️ 10-second polling delay
+
+The SmartGrade app does not publish its state changes to MQTT, so Home Assistant relies on HTTP polling to detect app-initiated changes. This results in a 10-15 second delay when you control devices from the official app.
+
+**Recommendation:** Use Home Assistant as your primary control interface for instant feedback.
+
 ## Troubleshooting
 
-### Devices not updating
+### Devices not updating immediately
 
-**Problem:** Device states don't update in real-time.
+**Problem:** Changes made in the SmartGrade app take 10-15 seconds to appear in Home Assistant.
+
+**Explanation:** This is expected behavior. The SmartGrade app does not publish state changes to MQTT when you control devices from the app itself. Home Assistant polls the API every 10 seconds to detect external changes.
+
+**Note:** Changes made FROM Home Assistant are instant (via MQTT), only changes made IN the app have this delay.
 
 **Solutions:**
 
-1. Check Home Assistant logs for MQTT connection errors:
+1. Accept the 10-second polling delay for app-initiated changes
+2. Use Home Assistant as your primary control interface for instant updates
+3. Check logs if the delay is longer than 10-15 seconds:
    ```
    Settings > System > Logs
-   Search for "smartgrade" or "mqtt"
+   Search for "smartgrade"
    ```
-
-2. If MQTT connection failed, the integration falls back to HTTP polling (30-second intervals)
 
 3. Restart the integration:
    ```

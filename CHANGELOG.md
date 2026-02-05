@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.3] - 2026-02-05
+
+### Fixed
+- Reduced HTTP polling interval from 30s to 10s for faster detection of app-initiated changes
+- Improved responsiveness when controlling devices from the SmartGrade mobile app
+
+### Changed
+- Optimized MQTT polling interval from 300s to 60s for better timer/schedule updates
+- Updated documentation to clarify MQTT behavior and update delays
+
+### Documentation
+- Added "Known Limitations" section explaining MQTT update direction
+- Clarified that app-initiated changes use HTTP polling (10s delay)
+- Documented that HA-initiated changes are instant via MQTT
+
 ## [1.0.2] - 2026-02-05
 
 ### Fixed
@@ -33,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Real-time MQTT updates
 - HTTP API fallback when MQTT unavailable
 - Timer management services (create/delete)
+[1.0.3]: https://github.com/itaimain/smartgrade-homeassistant/releases/tag/v1.0.3
 - Next timer sensor (timestamp)
 - Energy consumption sensor (kWh)
 - Token expiration warnings (3 days before)
