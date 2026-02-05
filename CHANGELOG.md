@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2026-02-05
+
+### Fixed
+- Fixed device discovery issue by using correct API endpoint `/api/v1/users/{user_id}/sites` instead of `/api/v1/sites`
+- Corrected query parameter from `withShared` to `shared` to match API specification
+- Devices will now be properly discovered during integration setup
+
 ## [1.0.0] - 2026-02-05
 
 ### Added
@@ -41,4 +48,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive documentation
 - HACS compatible
 
+[1.0.1]: https://github.com/itaimain/smartgrade-homeassistant/releases/tag/v1.0.1
 [1.0.0]: https://github.com/itaimain/homeassistant-smartgrade/releases/tag/v1.0.0
