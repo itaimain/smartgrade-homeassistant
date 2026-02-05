@@ -116,8 +116,8 @@ class SmartGradeMQTTClient:
                 )
                 return
             
-            _LOGGER.debug(
-                "Received MQTT message - device: %s, type: %s, payload: %s",
+            _LOGGER.info(
+                "📨 Received MQTT message - device: %s, type: %s, payload: %s",
                 device_id,
                 message_type,
                 payload,
@@ -125,7 +125,10 @@ class SmartGradeMQTTClient:
             
             # Call the callback if registered
             if self.on_message_callback:
+                _LOGGER.info("Calling registered MQTT callback")
                 self.on_message_callback(device_id, message_type, payload)
+            else:
+                _LOGGER.warning("No MQTT callback registered!")
                 
         except Exception as err:
             _LOGGER.exception("Error processing MQTT message: %s", err)

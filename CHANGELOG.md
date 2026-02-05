@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2] - 2026-02-05
+
+### Fixed
+- Added detailed MQTT message logging to diagnose real-time update delays
+- Enhanced MQTT callback logging to track message flow
+- Improved coordinator logging for MQTT message handling
+
+### Changed
+- Changed MQTT message logs from DEBUG to INFO level for better visibility
+
 ## [1.0.1] - 2026-02-05
 
 ### Fixed
@@ -38,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Real-time Updates**: MQTT client with automatic reconnection
 - **Monitoring**: Timer status and energy consumption sensors
 - **Services**: Create and delete device timers
+[1.0.2]: https://github.com/itaimain/smartgrade-homeassistant/releases/tag/v1.0.2
 - **User Experience**: Config flow, notifications, and repair flow
 
 ### Technical

@@ -145,8 +145,15 @@ class SmartGradeDataUpdateCoordinator(DataUpdateCoordinator):
             message_type: Message type ('power' or 'sensor')
             payload: Message payload
         """
+        _LOGGER.info(
+            "🔔 MQTT callback triggered - device: %s, type: %s, payload: %s",
+            device_id,
+            message_type,
+            payload,
+        )
+        
         if not self.data:
-            _LOGGER.debug("No data yet, ignoring MQTT message")
+            _LOGGER.warning("No coordinator data yet, ignoring MQTT message")
             return
         
         # Find device in our data
