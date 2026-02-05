@@ -1,0 +1,70 @@
+create_timer:
+  name: Create Timer
+  description: Create a new timer for a SmartGrade device
+  fields:
+    device_id:
+      name: Device ID
+      description: The device ID or entity ID to create a timer for
+      required: true
+      example: "switch.smartgrade_water_heater"
+      selector:
+        text:
+    time:
+      name: Time
+      description: Time to execute the timer (HH:MM format)
+      required: true
+      example: "08:00"
+      selector:
+        time:
+    action:
+      name: Action
+      description: Action to perform when timer triggers
+      required: true
+      selector:
+        select:
+          options:
+            - label: "Turn On"
+              value: "on"
+            - label: "Turn Off"
+              value: "off"
+    days:
+      name: Days
+      description: Days of the week to repeat the timer
+      required: false
+      selector:
+        select:
+          multiple: true
+          options:
+            - label: "Monday"
+              value: "monday"
+            - label: "Tuesday"
+              value: "tuesday"
+            - label: "Wednesday"
+              value: "wednesday"
+            - label: "Thursday"
+              value: "thursday"
+            - label: "Friday"
+              value: "friday"
+            - label: "Saturday"
+              value: "saturday"
+            - label: "Sunday"
+              value: "sunday"
+
+delete_timer:
+  name: Delete Timer
+  description: Delete an existing timer from a SmartGrade device
+  fields:
+    device_id:
+      name: Device ID
+      description: The device ID or entity ID to delete the timer from
+      required: true
+      example: "switch.smartgrade_water_heater"
+      selector:
+        text:
+    timer_id:
+      name: Timer ID
+      description: The ID of the timer to delete
+      required: true
+      example: "timer_123456"
+      selector:
+        text:

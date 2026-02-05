@@ -1,0 +1,17 @@
+{
+  "domain": "smartgrade",
+  "name": "SmartGrade",
+  "codeowners": [
+    "@smartgrade"
+  ],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/itaimain/smartgrade-homeassistant",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/itaimain/smartgrade-homeassistant/issues",
+  "requirements": [
+    "paho-mqtt>=1.6.1",
+    "pyjwt>=2.8.0"
+  ],
+  "version": "1.0.0"
+}

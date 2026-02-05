@@ -1,0 +1,12 @@
+{
+  "name": "SmartGrade",
+  "country": [
+    "IL"
+  ],
+  "domains": [
+    "smartgrade"
+  ],
+  "render_readme": true,
+  "iot_class": "Local Polling",
+  "homeassistant": "2023.1.0"
+}
