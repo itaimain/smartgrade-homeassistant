@@ -12,6 +12,7 @@ from .api_client import TokenExpiredError
 from .const import (
     DOMAIN,
     ISSUE_TOKEN_EXPIRED,
+    ISSUE_TOKEN_EXPIRING,
     NOTIFICATION_TOKEN_EXPIRING,
     TOKEN_WARNING_DAYS,
 )
@@ -86,6 +87,7 @@ class TokenManager:
                 seconds_remaining,
             )
             await self._create_expiry_notification(seconds_remaining)
+            await self.trigger_repair_flow(expiring_soon=True)
             self._warning_shown = True
         
         _LOGGER.debug(
@@ -125,21 +127,39 @@ class TokenManager:
         except Exception as err:
             _LOGGER.error("Failed to create expiry notification: %s", err)
 
-    async def trigger_repair_flow(self) -> None:
-        """Trigger Home Assistant repair flow for re-authentication."""
+    async def trigger_repair_flow(self, expiring_soon: bool = False) -> None:
+        """Trigger Home Assistant repair flow for re-authentication.
+
+        Args:
+            expiring_soon: If True, token is expiring soon (warning); if False, token has expired (error).
+        """
         try:
-            ir.async_create_issue(
-                self.hass,
-                DOMAIN,
-                ISSUE_TOKEN_EXPIRED,
-                is_fixable=True,
-                severity=ir.IssueSeverity.ERROR,
-                translation_key="token_expired",
-                translation_placeholders={
-                    "days": str(TOKEN_WARNING_DAYS),
-                },
-            )
-            _LOGGER.info("Created repair issue for token expiration")
+            if expiring_soon:
+                ir.async_create_issue(
+                    self.hass,
+                    DOMAIN,
+                    ISSUE_TOKEN_EXPIRING,
+                    is_fixable=True,
+                    severity=ir.IssueSeverity.WARNING,
+                    translation_key="token_expiring",
+                    translation_placeholders={
+                        "days": str(TOKEN_WARNING_DAYS),
+                    },
+                )
+                _LOGGER.info("Created repair issue for token expiring soon")
+            else:
+                ir.async_create_issue(
+                    self.hass,
+                    DOMAIN,
+                    ISSUE_TOKEN_EXPIRED,
+                    is_fixable=True,
+                    severity=ir.IssueSeverity.ERROR,
+                    translation_key="token_expired",
+                    translation_placeholders={
+                        "days": str(TOKEN_WARNING_DAYS),
+                    },
+                )
+                _LOGGER.info("Created repair issue for token expiration")
         except Exception as err:
             _LOGGER.error("Failed to create repair issue: %s", err)
 

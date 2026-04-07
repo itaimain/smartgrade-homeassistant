@@ -64,3 +64,4 @@ NOTIFICATION_TOKEN_EXPIRED = "smartgrade_token_expired"
 
 # Issue IDs for repairs
 ISSUE_TOKEN_EXPIRED = "token_expired"
+ISSUE_TOKEN_EXPIRING = "token_expiring"
