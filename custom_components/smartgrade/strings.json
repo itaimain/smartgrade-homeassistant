@@ -36,6 +36,17 @@
     }
   },
   "issues": {
+    "token_expiring": {
+      "title": "SmartGrade Token Expiring Soon",
+      "fix_flow": {
+        "step": {
+          "confirm": {
+            "title": "Re-authenticate SmartGrade",
+            "description": "Your SmartGrade token will expire in {days} day(s). Re-authenticate now to avoid interruption.\n\nClick 'Submit' to receive a new SMS code."
+          }
+        }
+      }
+    },
     "token_expired": {
       "title": "SmartGrade Authentication Expired",
       "fix_flow": {
